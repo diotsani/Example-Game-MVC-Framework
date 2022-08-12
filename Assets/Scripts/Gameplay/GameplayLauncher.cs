@@ -5,6 +5,8 @@ using Agate.MVC.Base;
 using Agate.MVC.Core;
 using ExampleGame.Boot;
 using ExampleGame.Home;
+using ExampleGame.Module.ClickGame;
+using ExampleGame.Module.Soundfx;
 
 namespace ExampleGame.Gameplay
 {
@@ -12,18 +14,29 @@ namespace ExampleGame.Gameplay
     {
         public override string SceneName => "Gameplay";
 
+        private ClickGameController _clickGame;
+
         protected override IConnector[] GetSceneConnectors()
         {
-            return null;
+            return new IConnector[]{
+                new GameplayConnector()
+            };
         }
 
         protected override IController[] GetSceneDependencies()
         {
-            return null;
+            return new IController[]
+            {
+                new SoundfxController(),
+                new ClickGameController()
+            };
+
+            //return null;
         }
 
         protected override IEnumerator InitSceneObject()
         {
+            _clickGame.SetView(_view.clickGameView);
             yield return null;
         }
 

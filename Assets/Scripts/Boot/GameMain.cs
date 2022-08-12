@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Agate.MVC.Base;
 using Agate.MVC.Core;
-
+using ExampleGame.Module.SaveData;
 
 namespace ExampleGame.Boot
 {
@@ -17,7 +17,10 @@ namespace ExampleGame.Boot
 
         protected override IController[] GetDependencies()
         {
-            return null;
+            return new IController[]
+            {
+                new SaveDataController()
+            };
         }
 
         protected override IEnumerator StartInit()
