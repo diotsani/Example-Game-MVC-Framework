@@ -8,6 +8,9 @@ namespace ExampleGame.Boot
 {
     public class SplashScreen : BaseSplash<SplashScreen>
     {
+        public GameObject loading;
+        float interval = 3f;
+        public float timer;
         protected override ILoad GetLoader()
         {
             return SceneLoader.Instance;
@@ -16,6 +19,20 @@ namespace ExampleGame.Boot
         protected override IMain GetMain()
         {
             return GameMain.Instance;
+        }
+
+        void Loading()
+        {
+            loading.SetActive(true);
+            timer += Time.deltaTime;
+            print(timer);
+            if (timer >= interval)
+            {
+                loading.SetActive(false);
+                base.FinishSplash();
+                base.FinishTransition();
+                timer -= interval;
+            }
         }
     }
 
